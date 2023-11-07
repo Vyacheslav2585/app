@@ -1,14 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Login from './screens/Login';
+import Home from './screens/Home';
+
+
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+  
+  const [currentScreen, setCurrentScreen] = useState('Login');
+  const  onLoginSuccess = () => {
+    // Логіка для успішного входу в систему
+    setCurrentScreen('Home'); // При успішному вході змінюємо екран на Home
+  };
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+  <Stack.Navigator>
+    <Stack.Screen
+      name="Login"
+      component={currentScreen === 'Login' ? Login : Home} // Вибір компонента в залежності від поточного екрану
+      options={{ headerShown: false }}
+    />
+  </Stack.Navigator>
+</NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
