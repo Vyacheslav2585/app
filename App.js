@@ -24,7 +24,7 @@ export default function App() {
       name="Login"
       component={currentScreen === 'Login' ? Login : Home} // Вибір компонента в залежності від поточного екрану
       options={{ headerShown: false }}
-    />
+    /> 
   </Stack.Navigator>
 </NavigationContainer>
   );
